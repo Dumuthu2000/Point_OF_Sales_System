@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb571ef1-eb67-48ae-9656-b7ba44c9d407">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT i.orderItemCode, i.orderItemName, i.orderItemPrice, i.orderItemQty, i.totalPrice,  o.orderDate FROM orderItem AS i INNER JOIN `order` AS o ON i.orderID = o.orderID WHERE o.orderDate BETWEEN o.orderDate AND o.orderDate;]]>
+	</queryString>
+	<field name="orderItemCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderItemName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderItemPrice" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderItemQty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totalPrice" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderDate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="orderItemName">
+		<groupExpression><![CDATA[$F{orderItemName}]]></groupExpression>
+	</group>
+	<group name="orderItemQty">
+		<groupExpression><![CDATA[$F{orderItemQty}]]></groupExpression>
+	</group>
+	<group name="totalPrice">
+		<groupExpression><![CDATA[$F{totalPrice}]]></groupExpression>
+	</group>
+	<group name="orderDate">
+		<groupExpression><![CDATA[$F{orderDate}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<staticText>
+				<reportElement x="138" y="65" width="322" height="38" uuid="55fd752b-0817-472e-a1bb-8975b4776fda"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROYAL MARKET PLAZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="103" width="201" height="20" uuid="0c32147b-d1f8-4386-a53f-fdccf8e18fe5"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Taste The Royal Treatment]]></text>
+			</staticText>
+			<image>
+				<reportElement x="259" y="15" width="85" height="50" uuid="9bad5110-7087-401b-84cd-6fd377d1d20b"/>
+				<imageExpression><![CDATA["C:\\Users\\dumut\\OneDrive\\Desktop\\royal.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="212" y="0" width="163" height="20" uuid="6328f3d5-1f00-4876-9cfb-14acef507ddc"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Salsement Summery]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="77" height="20" uuid="7233af8c-da69-414f-8bd4-175cbb6f9424"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="12" width="80" height="20" uuid="e61e6051-5fd0-4b6e-8262-33024bb67753"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="12" width="75" height="20" uuid="c736ae25-a603-4eaf-a393-e8bf9a9fa22b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price(Rs.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="12" width="70" height="20" uuid="6d4bc6a0-389e-44e8-90a5-ea4c8af230c3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sold Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="12" width="104" height="20" uuid="9008e727-2183-43ef-bc07-00c0aa838daf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Amount(Rs.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="12" width="54" height="20" uuid="c6d11978-9bf7-4491-9d94-a356d879f5d6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="100" height="20" uuid="f225aa14-6f8a-430e-a38a-14149e092afd"/>
+				<textElement>
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderItemCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="3" width="100" height="20" uuid="9c2fdbb0-4d45-4939-9f01-64589f15dec3"/>
+				<textElement>
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderItemName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="3" width="75" height="20" uuid="bcab708c-9ebb-4a7b-ab3e-210951eccc92"/>
+				<textElement>
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderItemPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="3" width="81" height="20" uuid="b91b53f8-a32a-4b64-9d9d-374147b52130"/>
+				<textElement>
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderItemQty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="3" width="68" height="20" uuid="e6dd2969-69e0-4702-9a63-177cccd7f2d7"/>
+				<textElement>
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="3" width="65" height="20" uuid="9fa47856-648b-4d9c-9a9f-ec825f59de90"/>
+				<textElement>
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="17" width="173" height="24" uuid="8582b921-a97a-484c-95eb-3b9a9c45fc83"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROYAL MARKET PLAZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="61" width="225" height="20" uuid="fd209f25-b079-4108-a727-2daf71cbdf45"/>
+				<text><![CDATA[Contact No: +94766620851 / +94758480523]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="41" width="186" height="20" uuid="304c766c-0a1b-4401-95fb-72f3cf410d1e"/>
+				<text><![CDATA[No 237/C, Main Streat, Minuwangoda.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="81" width="184" height="20" uuid="fed6736c-ea38-4a9b-8ac7-e2520e1277da"/>
+				<text><![CDATA[Email: royalmarketplaza@gmail.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="9" splitType="Stretch"/>
+	</summary>
+</jasperReport>

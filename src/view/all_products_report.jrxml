@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fba0336b-7d73-4b42-937a-75ebbe8125ad">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT productCode, productName, purchasePrice, stockQty, purchasedDate FROM product]]>
+	</queryString>
+	<field name="productCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="productName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="purchasePrice" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stockQty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="purchasedDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="productCode">
+		<groupExpression><![CDATA[$F{productCode}]]></groupExpression>
+	</group>
+	<group name="productName">
+		<groupExpression><![CDATA[$F{productName}]]></groupExpression>
+	</group>
+	<group name="purchasePrice">
+		<groupExpression><![CDATA[$F{purchasePrice}]]></groupExpression>
+	</group>
+	<group name="stockQty">
+		<groupExpression><![CDATA[$F{stockQty}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<staticText>
+				<reportElement x="196" y="88" width="201" height="20" uuid="acc0e758-a341-4f49-8ef6-c0545ea4f6c9"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Taste The Royal Treatment]]></text>
+			</staticText>
+			<image>
+				<reportElement x="258" y="0" width="85" height="50" uuid="e98ce5e4-69a3-4cc4-9eac-d9468a7c303b"/>
+				<imageExpression><![CDATA["C:\\Users\\dumut\\OneDrive\\Desktop\\royal.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="137" y="50" width="322" height="38" uuid="74c5dba3-5ce8-4ec4-972d-4cfe6a5632c1"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROYAL MARKET PLAZA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="219" y="0" width="163" height="20" uuid="2310a565-86de-49df-9734-bc44667a0308"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Products Summery]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="8a7a2530-86e4-4612-95a5-ffec201e7f8c"/>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="2" width="65" height="20" uuid="782f65d3-e1ca-445f-a8be-6a594d9954e8"/>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="2" width="79" height="20" uuid="43ea1cb2-5db2-41c9-94bf-b5c187ce1a01"/>
+				<text><![CDATA[Purchase Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="2" width="52" height="20" uuid="c584fd22-e962-487d-bb64-c837902a4387"/>
+				<text><![CDATA[Stock Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="2" width="100" height="20" uuid="2415a3ca-ddc0-4f78-9324-34075a97d786"/>
+				<text><![CDATA[Purchased Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20" uuid="f771b7ba-9370-4379-9366-85d5877e237e"/>
+				<textFieldExpression><![CDATA[$F{productCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="4" width="100" height="20" uuid="68848034-9b7d-4127-b23d-f36ab8ef2b48"/>
+				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="4" width="100" height="20" uuid="08c445bc-0572-44c0-8490-429a99782343"/>
+				<textFieldExpression><![CDATA[$F{purchasePrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="4" width="100" height="20" uuid="bc2c7d53-43aa-4c6d-98d3-f8492446ed9b"/>
+				<textFieldExpression><![CDATA[$F{stockQty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="4" width="100" height="20" uuid="d19b3d73-ea00-46da-9c97-48934729a464"/>
+				<textFieldExpression><![CDATA[$F{purchasedDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="24" width="186" height="20" uuid="1c1b7ff0-2771-4a9c-bcd4-e1b4a7742db1"/>
+				<text><![CDATA[No 237/C, Main Streat, Minuwangoda.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="0" width="173" height="24" uuid="49e5ef19-2cf9-44e0-970e-cca41f2b2bad"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROYAL MARKET PLAZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="44" width="225" height="20" uuid="15c8a18f-59e9-4b94-abb5-ecebab1f87f9"/>
+				<text><![CDATA[Contact No: +94766620851 / +94758480523]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="64" width="184" height="20" uuid="1f7898d7-db87-4aff-9610-cef1245bb613"/>
+				<text><![CDATA[Email: royalmarketplaza@gmail.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>
