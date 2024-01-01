@@ -741,14 +741,25 @@ public class VProducts extends javax.swing.JFrame {
     private void removeItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemBtnActionPerformed
         // TODO add your handling code here:
         CProduct products = new CProduct();
-        try {
-            String searchItem = searchTxt.getText();
-            products.deleteProductConnection(searchItem);
-            getProducts();
-            searchTxt.setText("");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        int selectedRow = itemTable.getSelectedRow();
+            if (selectedRow != -1){
+            // Retrieve data from the selected row and column
+                String orderItemCode = (String) itemTable.getValueAt(selectedRow, 0);
+                try {
+//                String searchItem = searchTxt.getText();
+                products.deleteProductConnection(orderItemCode);
+                
+                // Optional: Remove the selected row from the table
+                DefaultTableModel model = (DefaultTableModel) itemTable.getModel();
+                model.removeRow(selectedRow);
+                
+                getProducts();
+                searchTxt.setText("");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+            }
         }
+        
     }//GEN-LAST:event_removeItemBtnActionPerformed
 
     public static void main(String args[]) {
