@@ -23,6 +23,14 @@ public class VSales extends javax.swing.JFrame {
     public VSales() {
         initComponents();
         setCurrentDate();
+        // Create and start a timer to update the time every second
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setCurrentTime();
+            }
+        });
+        timer.start();
         setCurrentTime();
         balanceAmountLbl.setVisible(false);
         balanceAmountTxt.setVisible(false);
@@ -47,14 +55,14 @@ public class VSales extends javax.swing.JFrame {
        formattedDate = currentDate.format(formatter);
         dateLbl.setText(formattedDate);
     }
-    private void setCurrentTime(){
+   private void setCurrentTime() {
         LocalTime currentTime = LocalTime.now();
 
         // Define a formatter for the desired time format with AM/PM
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a");
 
         // Format the current time as a string
-        formattedTime = currentTime.format(formatter);
+        String formattedTime = currentTime.format(formatter);
         timeLbl.setText(formattedTime);
     }
     private int getProductID(String productName){

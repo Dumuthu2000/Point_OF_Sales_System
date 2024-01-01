@@ -3,6 +3,8 @@ import controller.CDashboard;
 import model.MDashboard.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.*;
 import java.time.LocalDate;
@@ -17,6 +19,15 @@ public class VDashboard extends javax.swing.JFrame {
     public VDashboard() {
         initComponents();
         setCurrentDate();
+        setCurrentDate();
+        // Create and start a timer to update the time every second
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setCurrentTime();
+            }
+        });
+        timer.start();
         setCurrentTime();
         
         getInvoiceCount();
@@ -40,14 +51,14 @@ public class VDashboard extends javax.swing.JFrame {
     }
     
     //get current time
-    private void setCurrentTime(){
+    private void setCurrentTime() {
         LocalTime currentTime = LocalTime.now();
 
         // Define a formatter for the desired time format with AM/PM
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a");
 
         // Format the current time as a string
-        formattedTime = currentTime.format(formatter);
+        String formattedTime = currentTime.format(formatter);
         timeLbl.setText(formattedTime);
     }
     
