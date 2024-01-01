@@ -3,7 +3,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class MProducts {
-    ResultSet result1, result2;
+    ResultSet result1, result2, result3;
     public void addProductItem(String productCode, String productName, float purchasedPrice, float sellPrice, int stockQty, String purchasedDate, int categoryID,  int supplierID){
         String query = "INSERT INTO product (productCode, productName, purchasePrice, sellPrice, stockQty , purchasedDate, categoryID, supplierID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -39,8 +39,14 @@ public class MProducts {
         try {
             PreparedStatement statement = MDbConnection.createConnection().prepareStatement(query);
             result1 = statement.executeQuery();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return result1;
     }
@@ -51,8 +57,14 @@ public class MProducts {
              PreparedStatement statement = MDbConnection.createConnection().prepareStatement(query);
              statement.setString(1, productCode);
              result2 = statement.executeQuery();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return result2;
     }
@@ -79,8 +91,14 @@ public class MProducts {
                 JOptionPane.showMessageDialog(null, "Updation not done...Try Again!!!!", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -103,8 +121,31 @@ public class MProducts {
                         JOptionPane.showMessageDialog(null, "Deletion not done...Try Again!!!!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public ResultSet getSuppliersForComboBox(){
+        String query = "SELECT supplierName FROM supplier";
+        try {
+             PreparedStatement statement = MDbConnection.createConnection().prepareStatement(query);
+             result3 = statement.executeQuery();
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return result3;
     }
 }

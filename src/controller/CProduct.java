@@ -27,4 +27,9 @@ public class CProduct {
         MProducts products = new MProducts();
         products.deleteProductItem(productCode);
     }
+    
+    public ResultSet getSuppliersForComboBoxConnection(){
+        MProducts products = new MProducts();
+        return products.getSuppliersForComboBox();
+    }
 }

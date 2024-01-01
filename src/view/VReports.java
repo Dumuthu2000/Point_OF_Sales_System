@@ -11,9 +11,11 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import model.MDbConnection;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class VReports extends javax.swing.JFrame {
     private String formattedDate;
@@ -73,10 +75,10 @@ public class VReports extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
-        fromDateTxt = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        toDateTxt = new javax.swing.JTextField();
         salesMonthlyReportBtn = new javax.swing.JButton();
+        salesFromDateTxt = new com.toedter.calendar.JDateChooser();
+        salesToDateTxt = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         dateLbl = new javax.swing.JLabel();
@@ -94,11 +96,11 @@ public class VReports extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jLabel26 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        jLabel27 = new javax.swing.JLabel();
-        fromDateTxt2 = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        toDateTxt2 = new javax.swing.JTextField();
         productsMonthlyReportBtn = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        productsFromDateTxt = new com.toedter.calendar.JDateChooser();
+        jLabel20 = new javax.swing.JLabel();
+        productsToDateTxt = new com.toedter.calendar.JDateChooser();
 
         jMenu1.setText("jMenu1");
 
@@ -239,25 +241,26 @@ public class VReports extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(salesFullReportBtn)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fromDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(toDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(salesMonthlyReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel16)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel15)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salesFromDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salesToDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -278,11 +281,12 @@ public class VReports extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(fromDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18)
-                    .addComponent(toDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17)
+                        .addComponent(jLabel18))
+                    .addComponent(salesFromDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salesToDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
@@ -290,7 +294,7 @@ public class VReports extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(salesMonthlyReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 30)); // NOI18N
@@ -355,14 +359,6 @@ public class VReports extends javax.swing.JFrame {
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Monthly Reports");
 
-        jLabel27.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("From:");
-
-        jLabel28.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("To:");
-
         productsMonthlyReportBtn.setBackground(new java.awt.Color(0, 153, 0));
         productsMonthlyReportBtn.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         productsMonthlyReportBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -373,6 +369,14 @@ public class VReports extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("From:");
+
+        jLabel20.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("To:");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -382,25 +386,26 @@ public class VReports extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(productsFullReportBtn)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fromDateTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(toDateTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(productsMonthlyReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel26)
-                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10))
-                    .addComponent(jLabel25))
+                    .addComponent(jLabel25)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(productsFromDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(productsToDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -421,11 +426,12 @@ public class VReports extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel26)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(fromDateTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28)
-                    .addComponent(toDateTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel20))
+                    .addComponent(productsFromDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productsToDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
@@ -433,7 +439,7 @@ public class VReports extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(productsMonthlyReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -463,10 +469,10 @@ public class VReports extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(adminProfileLbl))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(109, 109, 109)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -488,10 +494,10 @@ public class VReports extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(102, 102, 102)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -531,21 +537,32 @@ public class VReports extends javax.swing.JFrame {
 
     private void salesMonthlyReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesMonthlyReportBtnActionPerformed
         // TODO add your handling code here:
-        String fromDate = fromDateTxt.getText();
-        String toDate = toDateTxt.getText();
-         try {
-            // TODO add your handling code here:
-            JasperDesign japerDesign = JRXmlLoader.load("E:\\NIBM\\EAD\\Point_Of_Sales_System\\src\\view\\selected_sales_report.jrxml");
-            JRDesignQuery designQuery = new JRDesignQuery();
-            designQuery.setText("SELECT i.orderItemCode, i.orderItemName, i.orderItemPrice, i.orderItemQty, i.totalPrice,  o.orderDate FROM orderItem AS i INNER JOIN `order` AS o ON i.orderID = o.orderID WHERE o.orderDate BETWEEN '"+fromDate+"' AND '"+toDate+"' ORDER BY o.orderDate");
-            japerDesign.setQuery(designQuery);
-            JasperReport report = JasperCompileManager.compileReport(japerDesign);
-            JasperPrint print = JasperFillManager.fillReport(report, null, MDbConnection.createConnection());
-            JasperViewer.viewReport(print);
-           } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-        }
+        try {
+        // Get the date from JDateChooser components
+        Date fromDateObj = salesFromDateTxt.getDate();
+        Date toDateObj = salesToDateTxt.getDate();
+
+        // Create a SimpleDateFormat with the desired pattern
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Format the dates as strings
+        String fromDate = dateFormat.format(fromDateObj);
+        String toDate = dateFormat.format(toDateObj);
+
+        // Load and compile the JasperReport
+        JasperDesign japerDesign = JRXmlLoader.load("E:\\NIBM\\EAD\\Point_Of_Sales_System\\src\\view\\selected_sales_report.jrxml");
+        JRDesignQuery designQuery = new JRDesignQuery();
+        designQuery.setText("SELECT i.orderItemCode, i.orderItemName, i.orderItemPrice, i.orderItemQty, i.totalPrice,  o.orderDate FROM orderItem AS i INNER JOIN `order` AS o ON i.orderID = o.orderID WHERE o.orderDate BETWEEN '" + fromDate + "' AND '" + toDate + "' ORDER BY o.orderDate");
+        japerDesign.setQuery(designQuery);
+        JasperReport report = JasperCompileManager.compileReport(japerDesign);
+
+        // Fill and view the report
+        JasperPrint print = JasperFillManager.fillReport(report, null, MDbConnection.createConnection());
+        JasperViewer.viewReport(print);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+    }
     }//GEN-LAST:event_salesMonthlyReportBtnActionPerformed
 
     private void productsFullReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productsFullReportBtnActionPerformed
@@ -567,8 +584,8 @@ public class VReports extends javax.swing.JFrame {
 
     private void productsMonthlyReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productsMonthlyReportBtnActionPerformed
         // TODO add your handling code here:
-        String fromDate = fromDateTxt.getText();
-        String toDate = toDateTxt.getText();
+        String fromDate = productsFromDateTxt.getDateFormatString();
+        String toDate = productsToDateTxt.getDateFormatString();
         try {
             // TODO add your handling code here:
             JasperDesign japerDesign = JRXmlLoader.load("E:\\NIBM\\EAD\\Point_Of_Sales_System\\src\\view\\selected_product_report.jrxml");
@@ -604,8 +621,6 @@ public class VReports extends javax.swing.JFrame {
     private javax.swing.JLabel adminProfileLbl;
     private javax.swing.JLabel closeLbl;
     private javax.swing.JLabel dateLbl;
-    private javax.swing.JTextField fromDateTxt;
-    private javax.swing.JTextField fromDateTxt2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -614,11 +629,11 @@ public class VReports extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -640,12 +655,14 @@ public class VReports extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private com.toedter.calendar.JDateChooser productsFromDateTxt;
     private javax.swing.JButton productsFullReportBtn;
     private javax.swing.JButton productsMonthlyReportBtn;
+    private com.toedter.calendar.JDateChooser productsToDateTxt;
+    private com.toedter.calendar.JDateChooser salesFromDateTxt;
     private javax.swing.JButton salesFullReportBtn;
     private javax.swing.JButton salesMonthlyReportBtn;
+    private com.toedter.calendar.JDateChooser salesToDateTxt;
     private javax.swing.JLabel timeLbl;
-    private javax.swing.JTextField toDateTxt;
-    private javax.swing.JTextField toDateTxt2;
     // End of variables declaration//GEN-END:variables
 }

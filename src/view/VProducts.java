@@ -7,12 +7,17 @@ import java.awt.*;
 import javax.swing.*;
 import model.*;
 import controller.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class VProducts extends javax.swing.JFrame {
     public VProducts() {
         initComponents();
         getProducts();
+        getSupplierNamesForComboBox();
     }
     
     // Method to retrieve categoryId based on the selected category name
@@ -28,8 +33,14 @@ public class VProducts extends javax.swing.JFrame {
             if(result.next()){
                 categoryID = result.getInt("categoryID");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         return categoryID;
@@ -47,8 +58,14 @@ public class VProducts extends javax.swing.JFrame {
             if(result.next()){
                 categoryName = result.getString("categoryName");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         return categoryName;
@@ -67,12 +84,53 @@ public class VProducts extends javax.swing.JFrame {
             if(result.next()){
                 supplierID = result.getInt("supplierID");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         return supplierID;
     }
+       private void getSupplierNamesForComboBox() {
+            try {
+                CProduct products = new CProduct();
+                ResultSet result = products.getSuppliersForComboBoxConnection();
+
+                // Create a list to store supplier names
+                List<String> supplierNamesList = new ArrayList<>();
+
+                // Add a default item to the list
+                supplierNamesList.add("Select Supplier");
+
+                while (result.next()) {
+                    String supplierName = result.getString("supplierName");
+                    supplierNamesList.add(supplierName);
+                }
+
+                // Convert the list to an array
+                String[] supplierNamesArray = supplierNamesList.toArray(new String[0]);
+
+                // Create a ComboBoxModel using the array
+                DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(supplierNamesArray);
+
+                // Set the ComboBoxModel for the JComboBox
+                supplierCombo.setModel(comboBoxModel);
+
+            } catch (Exception e) {
+                // Handle other exceptions
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+}
+
+
+        
+        
         private String getSupplierName(int supplierID){
         String supplierName = "";
         String query = "SELECT supplierName FROM supplier WHERE supplierID = ?";
@@ -85,8 +143,14 @@ public class VProducts extends javax.swing.JFrame {
             if(result.next()){
                 supplierName = result.getString("supplierName");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         return supplierName;
@@ -113,8 +177,14 @@ public class VProducts extends javax.swing.JFrame {
                 
                 tableModel.addRow(new Object[]{productCode, productName, categoryName, purchasePrice, sellingPrice, stockQty, purchasedDate});
             }   
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     @SuppressWarnings("unchecked")
@@ -142,9 +212,9 @@ public class VProducts extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         itemQrtTxt = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        purchaseDateTxt = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         supplierCombo = new javax.swing.JComboBox<>();
+        purchaseDateTxt = new com.toedter.calendar.JDateChooser();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -262,14 +332,11 @@ public class VProducts extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Purchased Date:");
 
-        purchaseDateTxt.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
-
         jLabel18.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Supplier:");
 
         supplierCombo.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
-        supplierCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Supplier", "Ceylon Biscuit Limited (CBL) (pvt) Ltd", "Malliban Biscuit  (pvt) Ltd", "Fontera Srilanka", "Risbarry Chocalte (pvt) Ltd", "Unillivar Srilanka", "Ceylon tea (pvt) Ltd", "Nestlay Srilanka", "Perera & Sons" }));
 
         javax.swing.GroupLayout supplierTxtLayout = new javax.swing.GroupLayout(supplierTxt);
         supplierTxt.setLayout(supplierTxtLayout);
@@ -294,17 +361,20 @@ public class VProducts extends javax.swing.JFrame {
                                 .addComponent(purchasePriceTxt)
                                 .addComponent(sellingPriceTxt)
                                 .addComponent(itemCategoryCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, supplierTxtLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(43, 43, 43)
-                        .addComponent(purchaseDateTxt))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, supplierTxtLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(supplierTxtLayout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(99, 99, 99)
-                        .addComponent(supplierCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(supplierTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(supplierTxtLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel18)
+                                .addGap(99, 99, 99))
+                            .addGroup(supplierTxtLayout.createSequentialGroup()
+                                .addGroup(supplierTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(supplierTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(supplierCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(purchaseDateTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(68, 68, 68))
         );
         supplierTxtLayout.setVerticalGroup(
@@ -335,7 +405,7 @@ public class VProducts extends javax.swing.JFrame {
                     .addComponent(jLabel16)
                     .addComponent(itemQrtTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(supplierTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(supplierTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel17)
                     .addComponent(purchaseDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -539,41 +609,48 @@ public class VProducts extends javax.swing.JFrame {
 
     private void addItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemBtnActionPerformed
         // TODO add your handling code here:
-            // Gets user inputs and assigns them to variables
             String productCode = itemCodeTxt.getText().trim();
             String productName = itemNameTxt.getText().trim(); 
             float purchasedPrice = Float.parseFloat(purchasePriceTxt.getText().trim());
             float sellPrice = Float.parseFloat(sellingPriceTxt.getText().trim());
             int stockQty = Integer.parseInt(itemQrtTxt.getText().trim());
-            String purchasedDate = purchaseDateTxt.getText().trim();
+
+            // Retrieve the Date object from JDateChooser
+            Date purchasedDateObj = purchaseDateTxt.getDate();
+
+            // Create a SimpleDateFormat with the desired pattern
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Format the date as a string
+            String purchasedDate = dateFormat.format(purchasedDateObj);
+
             int categoryID = getCategoryId(itemCategoryCombo.getSelectedItem());
             int supplierID = getSupplierId(supplierCombo.getSelectedItem());
             CProduct  product = new CProduct();
-        try {
-            
-             if (productCode.isEmpty() || productName.isEmpty() || stockQty <= 0 || purchasedDate.isEmpty() || categoryID <= 0 || supplierID <= 0 || purchasedPrice < 0.0f || sellPrice < 0.00f) {
+
+            try {
+                if (productCode.isEmpty() || productName.isEmpty() || stockQty <= 0 || purchasedDate.isEmpty() || categoryID <= 0 || supplierID <= 0 || purchasedPrice < 0.0f || sellPrice < 0.00f) {
                     JOptionPane.showMessageDialog(null, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    product.addProductItemConnection(productCode, productName, purchasedPrice, sellPrice, stockQty, purchasedDate, categoryID, supplierID);
+                    getProducts(); 
                 }
-             else{
-                 
-                product.addProductItemConnection(productCode, productName, purchasedPrice, sellPrice, stockQty, purchasedDate, categoryID, supplierID);
-                getProducts(); 
-             }
+
+                // Clear input fields
                 itemCodeTxt.setText("");
                 itemNameTxt.setText("");
                 purchasePriceTxt.setText("");
                 sellingPriceTxt.setText("");
                 itemQrtTxt.setText("");
-                purchaseDateTxt.setText("");
+                purchaseDateTxt.setDate(null);  // Reset date chooser
                 itemCategoryCombo.setSelectedIndex(0);
                 supplierCombo.setSelectedIndex(0);
- 
-        } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "All fields are requied", "ERROR" , JOptionPane.ERROR_MESSAGE);
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
-        }
+
+            } catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "All fields are required", "ERROR" , JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_addItemBtnActionPerformed
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
@@ -590,7 +667,7 @@ public class VProducts extends javax.swing.JFrame {
             float purchasedPrice = Float.parseFloat(purchasePriceTxt.getText().trim());
             float sellPrice = Float.parseFloat(sellingPriceTxt.getText().trim());
             int stockQty = Integer.parseInt(itemQrtTxt.getText().trim());
-            String purchasedDate = purchaseDateTxt.getText().trim();
+            String purchasedDate = purchaseDateTxt.getDateFormatString();
             int categoryID = getCategoryId(itemCategoryCombo.getSelectedItem());
             int supplierID = getSupplierId(supplierCombo.getSelectedItem());
             String searchItem = searchTxt.getText().trim();
@@ -608,13 +685,19 @@ public class VProducts extends javax.swing.JFrame {
                purchasePriceTxt.setText("");
                sellingPriceTxt.setText("");
                itemQrtTxt.setText("");
-               purchaseDateTxt.setText("");
+               purchaseDateTxt.setDateFormatString("");
                itemCategoryCombo.setSelectedIndex(0);
                supplierCombo.setSelectedIndex(0);
                searchTxt.setText("");
              }  
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_updateItemBtnActionPerformed
 
@@ -640,12 +723,18 @@ public class VProducts extends javax.swing.JFrame {
                 purchasePriceTxt.setText(String.valueOf(purchasePrice));
                 sellingPriceTxt.setText(String.valueOf(sellingPrice));
                 itemQrtTxt.setText(String.valueOf(stockQty));
-                purchaseDateTxt.setText(purchasedDate);
+                purchaseDateTxt.setDateFormatString(purchasedDate);
                 itemCategoryCombo.setSelectedItem(getCategoryName(categoryID));
                 supplierCombo.setSelectedItem(getSupplierName(supplierID));
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR" , JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+                // Handle SQL exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An error occurred while processing the database operation.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+            // Handle other exceptions
+                e.printStackTrace(); // You might want to log the exception or handle it in a way suitable for your application.
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_searchLblMouseClicked
 
@@ -698,7 +787,7 @@ public class VProducts extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField purchaseDateTxt;
+    private com.toedter.calendar.JDateChooser purchaseDateTxt;
     private javax.swing.JTextField purchasePriceTxt;
     private javax.swing.JButton removeItemBtn;
     private javax.swing.JLabel searchLbl;
