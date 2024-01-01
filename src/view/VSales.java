@@ -327,7 +327,7 @@ public class VSales extends javax.swing.JFrame {
 
         cashierNameLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cashierNameLbl.setForeground(new java.awt.Color(0, 0, 204));
-        cashierNameLbl.setText("D.M Jayasinghe");
+        cashierNameLbl.setText("Mr.Malshan");
 
         cashierProfileLbl.setBackground(new java.awt.Color(255, 255, 255));
         cashierProfileLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/icons8-person-40.png"))); // NOI18N
